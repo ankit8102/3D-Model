@@ -11,10 +11,13 @@
   <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
       <!-- Define the marker using your custom image -->
-      <a-marker type="pattern" url="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.glb">
-        <!-- Add a custom 3D model -->
-        <!-- Replace this with your actual model URL later -->
-      <!--  <a-box position="0 0.5 0" material="color: blue"></a-box> -->
+      <a-marker type="pattern" url="https://github.com/ankit8102/3D-Model/blob/main/pattern-Untitled.png">
+        <!-- Load the Duck model -->
+        <a-entity 
+          gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.glb"
+          scale="0.1 0.1 0.1" 
+          position="0 0 0">
+        </a-entity>
       </a-marker>
 
       <!-- Standard marker camera -->
