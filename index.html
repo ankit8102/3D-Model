@@ -3,33 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D AR Cube with Custom Marker</title>
+    <title>3D AR Cube</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://aframe.io/releases/1.2.0/aframe-ar.js"></script>
-    <style>
-        body { margin: 0; }
-        canvas { display: none; }
-    </style>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/3.3.2/aframe/build/aframe-ar.js"></script>
 </head>
-<body>
-    <a-scene embedded arjs='sourceType: webcam;'>
-        <!-- Use your custom marker pattern file -->
-        <a-marker type='pattern' url='https://raw.githubusercontent.com/ankit8102/3D-Model/refs/heads/main/pattern-marker.patt'>
-            <a-box position="0 0.5 0" rotation="0 45 0" color="#4CC3D9" depth="1" height="1" width="1"></a-box>
-        </a-marker>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
         <a-entity camera></a-entity>
+        
+        <!-- 3D Cube -->
+        <a-box position="0 0.5 -2" rotation="0 45 0" color="#4CC3D2" shadow></a-box>
+        
+        <!-- Ground Plane -->
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+        
+        <!-- Light Source -->
+        <a-light type="ambient" color="#FFFFFF"></a-light>
+        <a-light type="directional" position="-1 1 1" intensity="0.5"></a-light>
     </a-scene>
-
-    <script>
-        // Debugging: Log when the marker is detected
-        const marker = document.querySelector('a-marker');
-        marker.addEventListener('markerFound', function() {
-            console.log('Marker found!');
-        });
-
-        marker.addEventListener('markerLost', function() {
-            console.log('Marker lost!');
-        });
-    </script>
 </body>
 </html>
