@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+                src="https://github.com/ankit8102/3D-Model/blob/main/realistic_pandasitting.glb" 
+
+                <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AR.js Example with Hiro Marker and Panda Model</title>
+    <title>AR.js Example with Custom Marker and Panda Model</title>
     <!-- Include the AR.js library -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
@@ -13,11 +15,11 @@
 <body>
     <!-- AR.js Scene -->
     <a-scene embedded arjs>
-        <!-- Marker -->
-        <a-marker preset="hiro">
+        <!-- Marker using custom .patt file -->
+        <a-marker type="pattern" url="assets/markers/custom-marker.patt">
             <!-- 3D Model of Panda -->
             <a-gltf-model 
-                src="https://github.com/ankit8102/3D-Model/blob/main/realistic_pandasitting.glb" 
+                src="https://example.com/models/panda.glb" 
                 scale="0.2 0.2 0.2" 
                 position="0 0 0" 
                 rotation="0 180 0">
