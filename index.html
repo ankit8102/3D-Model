@@ -4,22 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR Cube with Hiro Marker</title>
-    <!-- Include A-Frame library -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <!-- Include AR.js for augmented reality -->
     <script src="https://cdn.rawgit.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
-        <!-- Cube entity that appears when the Hiro marker is detected -->
         <a-marker type="pattern" url="https://raw.githubusercontent.com/ankit8102/3D-Model/refs/heads/main/pattern-marker.patt">
-            <a-box position="0 0.5 0" material="color: blue; opacity: 0.8" rotation="45 45 0" scale="0.5 0.5 0.5"></a-box>
+            <a-box position="0 0.5 0" material="color: blue; opacity: 0.8" scale="0.5 0.5 0.5"></a-box>
         </a-marker>
-        
-        <!-- Camera setup for AR -->
         <a-entity camera></a-entity>
     </a-scene>
-
     <p style="text-align: center;">Point your camera at the Hiro marker to see the cube!</p>
 </body>
 </html>
