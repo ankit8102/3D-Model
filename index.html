@@ -1,98 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>AR.js Example with Custom Marker and Panda Model</title>
-    <!-- Include the AR.js library -->
+    <meta charset="utf-8">
+    <title>AR.js Marker Test</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <style>
-        body { margin: 0; overflow: hidden; }
-        .arjs-loader {
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .arjs-loader div {
-            text-align: center;
-            font-size: 1.25em;
-            color: white;
-        }
-    </style>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
-<body>
-    <!-- Loading screen -->
-    <div class="arjs-loader">
-        <div>Loading, please wait...</div>
-    </div>
-
-    <!-- AR.js Scene -->
-    <a-scene 
-        embedded 
-        arjs='sourceType: webcam; debugUIEnabled: true; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'
-        renderer='logarithmicDepthBuffer: true;'
-        vr-mode-ui="enabled: false">
-
-        <!-- Marker using custom .patt file -->
-        <a-marker 
-            type="pattern" 
-            url="https://raw.githubusercontent.com/ankit8102/3D-Model/refs/heads/main/pattern-Untitled.patt"
-            raycaster="objects: .clickable"
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;">
-            
-            <!-- 3D Model of Panda -->
-            <a-gltf-model 
-                src="https://raw.githubusercontent.com/ankit8102/3D-Model/refs/heads/main/scene.gltf" 
-                scale="0.2 0.2 0.2" 
-                position="0 0 0" 
-                rotation="0 180 0"
-                class="clickable">
-            </a-gltf-model>
-
-            <!-- Adding lights -->
-            <a-entity light="type: ambient; intensity: 0.5;"></a-entity>
-            <a-entity light="type: directional; intensity: 0.5;" position="-1 1 0"></a-entity>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs="debugUIEnabled: true;">
+        <a-marker type="pattern" url="https://raw.githubusercontent.com/ankit8102/3D-Model/refs/heads/main/pattern-Untitled.patt">
+            <a-box position="0 0.5 0" material="color: red;"></a-box>
         </a-marker>
-
-        <!-- Camera -->
         <a-entity camera></a-entity>
     </a-scene>
 
     <script>
-        // Remove loader when scene is loaded
-        window.addEventListener('load', () => {
-            const loader = document.querySelector('.arjs-loader');
-            loader.style.display = 'none';
-        });
-
-        // Log when marker is found
         const marker = document.querySelector('a-marker');
         marker.addEventListener('markerFound', () => {
             console.log('Marker Found');
         });
-
-        // Log when marker is lost
         marker.addEventListener('markerLost', () => {
             console.log('Marker Lost');
-        });
-
-        // Log any model loading errors
-        const model = document.querySelector('a-gltf-model');
-        model.addEventListener('model-error', (error) => {
-            console.error('Model Error:', error);
-        });
-
-        // Log when model is loaded
-        model.addEventListener('model-loaded', () => {
-            console.log('Model Loaded Successfully');
         });
     </script>
 </body>
