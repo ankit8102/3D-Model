@@ -2,14 +2,19 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>AR.js Marker Test</title>
+    <title>AR.js Model Test</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs="debugUIEnabled: true;">
         <a-marker type="pattern" url="https://raw.githubusercontent.com/ankit8102/3D-Model/refs/heads/main/pattern-Untitled.patt">
-            <a-box position="0 0.5 0" material="color: red;"></a-box>
+            <a-entity
+                gltf-model="https://raw.githubusercontent.com/ankit8102/3D-Model/refs/heads/main/scene.gltf"
+                scale="0.1 0.1 0.1"
+                position="0 0 0"
+                rotation="0 0 0">
+            </a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
@@ -21,6 +26,14 @@
         });
         marker.addEventListener('markerLost', () => {
             console.log('Marker Lost');
+        });
+
+        const model = document.querySelector('[gltf-model]');
+        model.addEventListener('model-loaded', () => {
+            console.log('Model loaded successfully');
+        });
+        model.addEventListener('model-error', (error) => {
+            console.error('Model failed to load', error);
         });
     </script>
 </body>
