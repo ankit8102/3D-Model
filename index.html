@@ -2,40 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR Object Viewer</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-        #instructions {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 1;
-        }
-    </style>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
-<body>
-    <div id="instructions">
-        <h2>AR Object Viewer</h2>
-        <p>Scan the marker below with your mobile device to view the 3D object.</p>
-    </div>
-    
-    <a-scene embedded arjs='sourceType: webcam;'>
-        <a-marker preset="hiro">
+<body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs="sourceType: webcam;">
+        <!-- Load 3D Model and Image Assets -->
+        <a-assets>
+            <a-asset-item id="3d-model" src="model.glb"></a-asset-item>
+        </a-assets>
+
+        <!-- Define a target image for AR tracking -->
+        <a-image src="target.png" width="1" height="1">
+            <!-- Place the 3D model on the target image -->
             <a-entity 
-                gltf-model="2003_nissan_350z_veliside_z33_ver.iii_body_kit.glb" 
-                scale="0.5 0.5 0.5"
-                position="0 0 0">
+                gltf-model="#3d-model" 
+                scale="0.5 0.5 0.5" 
+                position="0 0 0" 
+                rotation="0 45 0">
             </a-entity>
-        </a-marker>
+        </a-image>
+
+        <!-- Add a camera entity for user interaction -->
         <a-entity camera></a-entity>
     </a-scene>
 </body>
