@@ -1,71 +1,26 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>AR.js Model Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Cube with Hiro Marker</title>
+    <!-- Include A-Frame library -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <!-- Include AR.js for augmented reality -->
+    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
-    <!-- Loading indicator -->
-    <div style="position: fixed; top: 10px; left: 10px; color: white; z-index: 999;">
-        Loading model...
-    </div>
-
-    <a-scene embedded arjs="debugUIEnabled: true;">
-        <a-assets>
-            <!-- Try using a different model to test -->
-            <a-asset-item id="panda-model" 
-                src="https://github.com/ankit8102/3D-Model/blob/main/realistic_pandasitting%20(1).glb">
-            </a-asset-item>
-        </a-assets>
-
+    <a-scene embedded arjs>
+        <!-- Cube entity that appears when the Hiro marker is detected -->
         <a-marker type="pattern" url="https://raw.githubusercontent.com/ankit8102/3D-Model/refs/heads/main/pattern-Untitled.patt">
-            <!-- Add a simple shape to confirm marker detection -->
-            <a-box position="0 0.5 0" color="red" scale="0.2 0.2 0.2" visible="true"></a-box>
-            
-            <!-- 3D Model -->
-            <a-entity
-                position="0 0 0"
-                rotation="0 0 0"
-                scale="0.1 0.1 0.1"
-                gltf-model="#panda-model">
-            </a-entity>
-
-            <!-- Add some lights -->
-            <a-entity light="type: ambient; intensity: 0.5;"></a-entity>
-            <a-entity light="type: directional; intensity: 0.5;" position="-1 1 0"></a-entity>
+            <a-box position="0 0.5 0" material="color: blue; opacity: 0.8" rotation="45 45 0" scale="0.5 0.5 0.5"></a-box>
         </a-marker>
-
+        
+        <!-- Camera setup for AR -->
         <a-entity camera></a-entity>
     </a-scene>
 
-    <script>
-        // Debug logging
-        window.addEventListener('load', () => {
-            console.log('Page loaded');
-        });
-
-        const marker = document.querySelector('a-marker');
-        marker.addEventListener('markerFound', () => {
-            console.log('Marker Found');
-            document.querySelector('a-box').setAttribute('visible', 'false');
-        });
-
-        marker.addEventListener('markerLost', () => {
-            console.log('Marker Lost');
-        });
-
-        const model = document.querySelector('[gltf-model]');
-        model.addEventListener('model-loaded', () => {
-            console.log('Model loaded successfully');
-            document.querySelector('div').style.display = 'none';
-        });
-
-        model.addEventListener('model-error', (error) => {
-            console.error('Model failed to load:', error.detail.src);
-            document.querySelector('div').textContent = 'Error loading model';
-        });
-    </script>
+    <p style="text-align: center;">Point your camera at the Hiro marker to see the cube!</p>
 </body>
 </html>
